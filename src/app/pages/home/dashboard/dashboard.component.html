@@ -1,1 +1,2 @@
-<p>dashboard works!</p>
+<button class="btn btn-primary" (click)="onStartClick()" *ngIf="!startedSim" >Start</button>
+<button class="btn btn-secondary" (click)="onStopClick()" *ngIf="startedSim" >Stop</button>

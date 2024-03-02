@@ -38,6 +38,7 @@ export class AuthService {
       return throwError(() => `Backend returned code ${error.status}, ` + `body was: ${error.error}`);
     }
   }
+  
   isLogged(): boolean {
     const token = localStorage.getItem('token');
     if(token === null)
