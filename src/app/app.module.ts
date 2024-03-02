@@ -7,6 +7,7 @@ import { SigninComponent } from './pages/auth/signin/signin.component';
 import { DashboardComponent } from './pages/home/dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthGuard } from './guards/auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

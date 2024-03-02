@@ -4,6 +4,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { LoginRequest, LoginResponse } from '../models/auth.models';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -38,8 +39,18 @@ export class AuthService {
     }
   }
   isLogged(): boolean {
+    const token = localStorage.getItem('token');
+    if(token === null)
+      return false;
+    
+    const decoded = jwtDecode(token);
+    const expdate = decoded.exp;
+    if(expdate === null || expdate === undefined)
+      return false;
+
     const now = new Date().getTime();
-    const dateExpiration = new Date();
+    const dateExpiration = new Date(0);
+    dateExpiration.setUTCSeconds(expdate);
     if (now >= dateExpiration.getTime()) {
       this.removeLocalStorage();
       return false;
