@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, tap } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { LoginRequest, LoginResponse } from '../models/auth.models';
 import { Router } from '@angular/router';
 
@@ -36,5 +36,19 @@ export class AuthService {
     } else {
       return throwError(() => `Backend returned code ${error.status}, ` + `body was: ${error.error}`);
     }
+  }
+  isLogged(): boolean {
+    const now = new Date().getTime();
+    const dateExpiration = new Date();
+    if (now >= dateExpiration.getTime()) {
+      this.removeLocalStorage();
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  removeLocalStorage(): void {
+    localStorage.removeItem('user');
   }
 }
