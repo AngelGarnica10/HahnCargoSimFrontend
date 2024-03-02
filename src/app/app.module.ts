@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { SigninComponent } from './pages/auth/signin/signin.component';
 import { DashboardComponent } from './pages/home/dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './guards/auth/auth.guard';
 import { UnauthGuard } from './guards/unauth/unauth.guard';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { UnauthGuard } from './guards/unauth/unauth.guard';
   ],
   providers: [
     AuthGuard,
-    UnauthGuard
+    UnauthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
