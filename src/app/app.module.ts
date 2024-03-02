@@ -8,6 +8,7 @@ import { DashboardComponent } from './pages/home/dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './guards/auth/auth.guard';
+import { UnauthGuard } from './guards/unauth/unauth.guard';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AuthGuard } from './guards/auth/auth.guard';
     FormsModule
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    UnauthGuard
   ],
   bootstrap: [AppComponent]
 })

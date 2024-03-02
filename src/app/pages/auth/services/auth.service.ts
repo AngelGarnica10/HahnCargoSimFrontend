@@ -49,9 +49,9 @@ export class AuthService {
       return false;
 
     const now = new Date().getTime();
-    const dateExpiration = new Date(0);
-    dateExpiration.setUTCSeconds(expdate);
-    if (now >= dateExpiration.getTime()) {
+    const expirationDate = new Date(0);
+    expirationDate.setUTCSeconds(expdate);
+    if (now >= expirationDate.getTime()) {
       this.removeLocalStorage();
       return false;
     } else {
