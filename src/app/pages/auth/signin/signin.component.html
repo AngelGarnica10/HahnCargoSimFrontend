@@ -1,0 +1,16 @@
+<ng-container class="d-flex justify-content-center">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Login</h5>
+            <div class="form-floating mb-3">
+                <input class="form-control" id="floatingInput" [(ngModel)]="username">
+                <label for="floatingInput">Username</label>
+              </div>
+              <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" [(ngModel)]="password" >
+                <label for="floatingPassword">Password</label>
+              </div>
+            <button href="#" class="btn btn-primary" (click)="onClick()" [disabled]="username === '' || password === ''">Login</button>
+        </div>
+    </div>
+</ng-container>
