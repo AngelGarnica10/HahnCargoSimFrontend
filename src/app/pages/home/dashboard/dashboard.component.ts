@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SimService } from '../sim.service';
+import { SimService } from '../services/sim.service';
+import { OrdersService } from '../services/orders.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +11,8 @@ export class DashboardComponent implements OnInit {
   startedSim = false;
 
   constructor(
-    private simService: SimService
+    private simService: SimService,
+    private orderService: OrdersService
   ) {}
 
   ngOnInit(): void {
@@ -29,6 +31,13 @@ export class DashboardComponent implements OnInit {
     this.simService.stop()
     .subscribe({
       next: () => this.startedSim = false,
+      error: (errorMessage) => alert(errorMessage)
+    });
+  }
+
+  onCreateOrderClick(): void {
+    this.orderService.create()
+    .subscribe({
       error: (errorMessage) => alert(errorMessage)
     });
   }
